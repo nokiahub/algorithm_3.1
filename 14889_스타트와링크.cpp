@@ -8,12 +8,8 @@ int go(vector <int> &d, int n) {
 	int x=0, y=0;
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
-			if (d[i] == 0 && d[j]==0) {
-				x += a[i][j];
-			}
-			if (d[i] == 1 && d[j] == 1) {
-				y += a[i][j];
-			}
+			if (d[i] == 0 && d[j]==0) x += a[i][j];
+			if (d[i] == 1 && d[j] == 1) y += a[i][j];
 		}
 	}
 	ret = x - y;
