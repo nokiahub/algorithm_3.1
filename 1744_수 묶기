@@ -1,0 +1,40 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int main() {
+	int n;
+	bool zero = false;
+	int one = 0;
+	cin >> n;
+
+	vector <int> negative;
+	vector <int> positive;
+
+	for (int i = 0; i < n; i++) {
+		int tmp;
+		cin >> tmp;
+		if (tmp == 1) one++;
+		if (tmp < 0) negative.push_back(tmp);
+		if (tmp > 1) positive.push_back(tmp);
+		if (tmp == 0) zero = true;
+	}
+
+	sort(positive.begin(), positive.end());
+	reverse(positive.begin(), positive.end());
+	sort(negative.begin(), negative.end());
+
+	if (positive.size() % 2 == 1) positive.push_back(1);
+	if (negative.size() % 2 == 1) negative.push_back(zero? 0 : 1);
+
+	int sum = one;
+	for (int i = 0; i < positive.size(); i+=2) {
+			sum += positive[i] * positive[i + 1];
+	}
+	for (int i = 0; i < negative.size(); i += 2) {
+		sum += negative[i] * negative[i + 1];
+	}
+	cout << sum << '\n';
+	return 0;
+}
