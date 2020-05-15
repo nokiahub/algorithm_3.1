@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main() {
+	string s;
+	cin >> s;
+	vector <int> sign;
+	vector <int> number;
+	int cur = 0;
+	sign.push_back(1);
+	for (int i = 0; i < s.size(); i++) {
+		if (s[i] == '+' || s[i]=='-') {
+			if (s[i] == '+') sign.push_back(1);
+			else sign.push_back(0);
+			number.push_back(cur);
+			cur = 0;
+		}
+		else {
+			cur = cur * 10 + s[i] - '0';
+		}
+	}
+	number.push_back(cur);
+
+	int sum = 0;
+	bool minus = false;
+	for (int i = 0; i < sign.size(); i++) {
+		if (sign[i] == 0) {
+				sum -= number[i];
+				minus = true;
+		}else {
+			if (!minus) {
+				sum += number[i];
+			}else {
+				sum -= number[i];
+			}
+		}
+	}
+	cout << sum << '\n';
+	return 0;
+}
