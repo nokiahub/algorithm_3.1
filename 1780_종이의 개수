@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+int a[3000][3000];
+int b[3];
+
+bool check(int x, int y, int n){
+    int num = a[x][y];
+    for(int i = x ; i<x+n ; i++)
+        for(int j = y ; j<y+n ; j++)
+            if(a[i][j]!=num) return false;
+    
+    return true;
+}
+void go(int x, int y, int n){
+    if(n==1){
+        b[a[x][y]]+=1;
+        return;
+    }
+    
+    if(check(x, y, n)==false){
+        int div = n/3;
+        for(int i = x ; i<x+n ; i+=div)
+            for(int j = y ; j<y+n ; j+=div)
+                go(i, j, div);
+    }else{
+        b[a[x][y]]+=1;
+    }
+}
+int main(int argc, const char * argv[]) {
+    int n;
+    cin >> n;
+    
+    for(int i = 0 ; i<n ; i++)
+        for(int j = 0; j<n ; j++){
+            cin >> a[i][j];
+            a[i][j]+=1;
+        }
+    go(0, 0, n);
+    printf("%d\n%d\n%d\n", b[0], b[1], b[2]);
+    return 0;
+}
